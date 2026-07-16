@@ -39,8 +39,9 @@ jobs:
       - name: Build with obfuscation
         run: npm run build
         env:
-          # 后端地址 + 客户端标识为非敏感值；API Key 通过仓库 Secret 注入。
-          VITE_API_BASE_URL: https://jiaoshulang-api.azurewebsites.net
+          # 经 APIM 网关访问后端（隐藏 App Service 真实地址）。
+          # VITE_API_KEY = APIM 订阅密钥（Ocp-Apim-Subscription-Key）；后端 X-Api-Key 由 APIM 注入。
+          VITE_API_BASE_URL: https://jiaoshulang-gateway.azure-api.net
           VITE_CLIENT_ID: web-frontend
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
 

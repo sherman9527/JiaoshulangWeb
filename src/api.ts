@@ -1,9 +1,9 @@
-import { API_BASE_URL, CLIENT_ID, API_KEY } from './config';
+import { API_BASE_URL, API_KEY } from './config';
 
 function authHeaders(): Record<string, string> {
+  // 经 APIM 网关：只带网关订阅密钥；后端所需的 X-Client-Id/X-Api-Key 由 APIM 注入（藏在网关里）。
   return {
-    'X-Client-Id': CLIENT_ID,
-    'X-Api-Key': API_KEY,
+    'Ocp-Apim-Subscription-Key': API_KEY,
   };
 }
 

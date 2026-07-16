@@ -1,4 +1,4 @@
-import { API_BASE_URL, CLIENT_ID, API_KEY } from './config';
+import { API_BASE_URL, API_KEY } from './config';
 
 export interface DownloadOutcome {
   ok: boolean;
@@ -17,7 +17,7 @@ export interface DownloadOutcome {
 export async function requestDownload(channel: 'beta' | 'stable' = 'beta'): Promise<DownloadOutcome> {
   try {
     const res = await fetch(`${API_BASE_URL}/api/v1/downloads/${channel}/exe`, {
-      headers: { 'X-Client-Id': CLIENT_ID, 'X-Api-Key': API_KEY },
+      headers: { 'Ocp-Apim-Subscription-Key': API_KEY },
     });
 
     if (res.ok) {
