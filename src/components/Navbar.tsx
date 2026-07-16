@@ -102,7 +102,7 @@ export default function Navbar() {
           onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#8B3A4A')}
         >
           <QrCode24Regular />
-          扫码购买
+          立即订阅
         </a>
 
         {/* Mobile hamburger */}
@@ -163,7 +163,7 @@ export default function Navbar() {
                 }}
               >
                 <QrCode24Regular />
-                扫码购买
+                立即订阅
               </a>
             </div>
           </motion.div>

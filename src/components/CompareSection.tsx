@@ -5,11 +5,11 @@ import { CheckmarkCircle24Regular, DismissCircle24Regular } from '@fluentui/reac
 const comparisons = [
   { feature: '稿件数据安全', jsl: true, online: false, note: '完全离线 vs 上传云端' },
   { feature: '无需联网', jsl: true, online: false, note: '本地模型 vs 云端API' },
-  { feature: '无云端费用', jsl: true, online: false, note: '买断制 vs 按量付费' },
+  { feature: '无云端费用', jsl: true, online: false, note: '订阅制 vs 按量计费' },
   { feature: '79+专业领域', jsl: true, online: true, note: '' },
   { feature: 'PDF批注导出', jsl: true, online: true, note: '' },
   { feature: '出版规范检查', jsl: true, online: false, note: '内置国标 vs 通用规则' },
-  { feature: '买断制定价', jsl: true, online: false, note: '¥299起 vs 月付' },
+  { feature: '价格实惠', jsl: true, online: false, note: '¥29/月 本地无限用 vs 按 token 计费' },
   { feature: '无限离线使用', jsl: true, online: false, note: '无次数限制' },
 ];
 
