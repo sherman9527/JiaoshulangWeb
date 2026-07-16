@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Env — 不提交任何环境变量文件
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+*.log

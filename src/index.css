@@ -1,0 +1,188 @@
+:root {
+  --wine: #8B3A4A;
+  --wine-dark: #6B2A35;
+  --wine-light: #B86E7A;
+  --ice-blue: #EEF2F7;
+  --cream: #FAF7F2;
+  --gold: #C4915E;
+  --text-primary: #2D1B1E;
+  --text-secondary: #6B4A50;
+  --border: #D9C4B0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ice-blue);
+  color: var(--text-primary);
+  font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Noto Serif SC', 'SimSun', serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+/* Rice paper texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ice-blue);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wine-light);
+  border-radius: 3px;
+}
+
+/* ===== Responsive Grid Layouts ===== */
+
+/* Feature grid: 3 cols → 2 → 1 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .feature-grid { grid-template-columns: 1fr; }
+}
+
+/* Security grid: 2 cols → 1 */
+.security-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 700px) {
+  .security-grid { grid-template-columns: 1fr; }
+}
+
+/* Compare table: scrollable on mobile */
+.compare-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.compare-table {
+  min-width: 480px;
+}
+.compare-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  padding: 14px 20px;
+  align-items: center;
+}
+.compare-header {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  padding: 14px 20px;
+  background-color: #FAF7F2;
+  border-bottom: 1px solid rgba(217, 196, 176, 0.3);
+}
+@media (min-width: 600px) {
+  .compare-row { grid-template-columns: 1fr 120px 120px; padding: 14px 24px; }
+  .compare-header { grid-template-columns: 1fr 120px 120px; padding: 16px 24px; }
+}
+
+/* Guide steps: horizontal → vertical */
+.guide-steps {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 700px) {
+  .guide-steps { flex-direction: column; align-items: center; gap: 48px; }
+}
+
+/* Hero CTA buttons: stack on mobile */
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 500px) {
+  .hero-cta { flex-direction: column; align-items: center; }
+  .hero-cta a { width: 100%; max-width: 280px; justify-content: center; }
+}
+
+/* Hero stats: stack on mobile */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+@media (max-width: 500px) {
+  .hero-stats { gap: 32px; }
+}
+
+/* Hero mockup: scale down on mobile */
+.hero-mockup {
+  max-width: 780px;
+  margin: 72px auto 0;
+}
+@media (max-width: 600px) {
+  .hero-mockup { margin: 48px 16px 0; }
+  .hero-mockup > div { transform: scale(0.85); transform-origin: top center; }
+}
+
+/* Section padding: reduce on mobile */
+.section-padding {
+  padding: 120px 24px;
+}
+@media (max-width: 600px) {
+  .section-padding { padding: 72px 16px; }
+}
+
+/* Compare section note: hide on very small screens */
+.compare-note {
+  font-size: 11px;
+  color: #B86E7A;
+  margin-left: 8px;
+  font-weight: 300;
+}
+@media (max-width: 500px) {
+  .compare-note { display: none; }
+}

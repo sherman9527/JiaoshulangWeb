@@ -1,0 +1,28 @@
+{
+  "name": "jiaoshulang-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fluentui/react-components": "^9.58.0",
+    "@fluentui/react-icons": "^2.0.333",
+    "framer-motion": "^11.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "javascript-obfuscator": "^5.4.7",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5",
+    "vite-plugin-javascript-obfuscator": "^3.1.0"
+  }
+}
