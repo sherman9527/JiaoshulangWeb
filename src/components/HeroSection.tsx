@@ -1,22 +1,18 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDownload24Regular, Shield24Regular } from '@fluentui/react-icons';
-import { useRef } from 'react';
-import { apiGet } from '../api';
+import { useRef, useState } from 'react';
+import { requestDownload } from '../download';
 import Logo from './Logo';
 
 export default function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const [notice, setNotice] = useState('');
 
   const handleDownload = async () => {
-    try {
-      const data = await apiGet<{ downloadUrl: string; fileName: string }>(
-        '/api/v1/downloads/beta/exe'
-      );
-      // 浏览器直接访问 SAS URL 下载
-      window.location.href = data.downloadUrl;
-    } catch {
-      // 降级：直接跳转下载页
-      window.location.href = '#download';
+    const r = await requestDownload('beta');
+    if (!r.ok) {
+      setNotice(r.message ?? '下载暂时不可用，请稍后再试');
+      setTimeout(() => setNotice(''), 5000);
     }
   };
   const { scrollYProgress } = useScroll({
@@ -225,6 +221,26 @@ export default function HeroSection() {
             了解更多
           </motion.a>
         </motion.div>
+
+        {notice && (
+          <motion.p
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{
+              marginTop: 16,
+              fontSize: 14,
+              fontWeight: 300,
+              color: '#8B3A4A',
+              backgroundColor: 'rgba(139, 58, 74, 0.08)',
+              border: '1px solid rgba(139, 58, 74, 0.15)',
+              borderRadius: 10,
+              padding: '8px 16px',
+              display: 'inline-block',
+            }}
+          >
+            {notice}
+          </motion.p>
+        )}
 
         {/* App mockup preview */}
         <motion.div

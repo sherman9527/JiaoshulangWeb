@@ -1,20 +1,18 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ArrowDownload24Regular } from '@fluentui/react-icons';
-import { apiGet } from '../api';
+import { requestDownload } from '../download';
 
 export default function CtaSection() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [notice, setNotice] = useState('');
 
   const handleDownload = async () => {
-    try {
-      const data = await apiGet<{ downloadUrl: string; fileName: string }>(
-        '/api/v1/downloads/beta/exe'
-      );
-      window.location.href = data.downloadUrl;
-    } catch {
-      window.location.href = '#hero';
+    const r = await requestDownload('beta');
+    if (!r.ok) {
+      setNotice(r.message ?? '下载暂时不可用，请稍后再试');
+      setTimeout(() => setNotice(''), 5000);
     }
   };
 
@@ -148,6 +146,26 @@ export default function CtaSection() {
             查看价格
           </motion.a>
         </motion.div>
+
+        {notice && (
+          <motion.p
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            style={{
+              marginTop: 20,
+              fontSize: 14,
+              fontWeight: 300,
+              color: '#FAF7F2',
+              backgroundColor: 'rgba(250, 247, 242, 0.12)',
+              border: '1px solid rgba(250, 247, 242, 0.25)',
+              borderRadius: 10,
+              padding: '8px 16px',
+              display: 'inline-block',
+            }}
+          >
+            {notice}
+          </motion.p>
+        )}
       </div>
     </section>
   );
