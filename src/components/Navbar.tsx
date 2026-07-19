@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { QrCode24Regular, Navigation24Regular } from '@fluentui/react-icons';
 import Logo from './Logo';
+import ContactAuthorModal from './ContactAuthorModal';
 
 const navLinks = [
   { label: '功能', href: '#features' },
@@ -11,6 +12,15 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+
+  const navLinkStyle = {
+    fontSize: 14,
+    fontWeight: 300,
+    color: '#6B4A50',
+    transition: 'color 0.2s',
+    letterSpacing: '0.04em',
+  } as const;
 
   return (
     <nav
@@ -66,19 +76,21 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              style={{
-                fontSize: 14,
-                fontWeight: 300,
-                color: '#6B4A50',
-                transition: 'color 0.2s',
-                letterSpacing: '0.04em',
-              }}
+              style={navLinkStyle}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#8B3A4A')}
               onMouseLeave={(e) => (e.currentTarget.style.color = '#6B4A50')}
             >
               {link.label}
             </a>
           ))}
+          <button
+            onClick={() => setContactOpen(true)}
+            style={{ ...navLinkStyle, background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#8B3A4A')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#6B4A50')}
+          >
+            联系作者
+          </button>
         </div>
 
         {/* Right: Download button (desktop) */}
@@ -146,6 +158,23 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  setContactOpen(true);
+                }}
+                style={{
+                  fontSize: 16,
+                  color: '#6B4A50',
+                  padding: '4px 0',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                }}
+              >
+                联系作者
+              </button>
               <a
                 href="#pricing"
                 onClick={() => setMobileOpen(false)}
@@ -179,6 +208,8 @@ export default function Navbar() {
           .nav-mobile-menu { display: none !important; }
         }
       `}</style>
+
+      <ContactAuthorModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </nav>
   );
 }
