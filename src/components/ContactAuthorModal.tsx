@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apiPost } from '../api';
 
@@ -47,7 +48,7 @@ export default function ContactAuthorModal({ open, onClose }: Props) {
     }
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && (
         <div
@@ -180,6 +181,7 @@ export default function ContactAuthorModal({ open, onClose }: Props) {
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
